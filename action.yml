@@ -1,13 +1,22 @@
 name: 'Hello World'
-description: 'Greet someone and record the time'
+description: 'Cache builds to speed up openwrt compile'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  ccache:
+    description: 'check if to store ccache'
     required: true
-    default: 'World'
+    default: 'true'
+  toolchain:
+    description: 'check if to store toolchain'
+    required: true
+    default: 'true'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  hit:
+    description: 'indicate cache found'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'fetch.js'
+  post: 'save.js'
+  post-if: 'success()'
+branding:
+  icon: 'archive'
+  color: 'gray-dark'
