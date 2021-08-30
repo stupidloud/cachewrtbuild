@@ -1,14 +1,22 @@
 name: 'Hello World'
-description: 'Cache builds to speed up openwrt compile'
+description: 'Cache builds to speed up openwrt compilation'
 inputs:
   ccache:
-    description: 'check if to store ccache'
-    required: true
-    default: 'true'
+    description: 'check if to cache ccache'
+    required: false
+    default: false
   toolchain:
-    description: 'check if to store toolchain'
-    required: true
-    default: 'true'
+    description: 'check if to cache toolchain'
+    required: false
+    default: true
+  skip:
+    description: 'check if to skip the compilation of toolchain'
+    required: false
+    default: true
+  clean:
+    description: 'set to clean cache'
+    required: false
+    default: false
 outputs:
   hit:
     description: 'indicate cache found'

@@ -1,27 +1,36 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const execSync = require('child_process').execSync;
 
 try {
-  var paths = new Array()
-  var keyString = 'cache-openwrt-'
-  var keyString1= 'cache-openwrt-'
-
-  const exec = require('@actions/exec');
+  var paths = new Array();
+  var keyString = 'cache-openwrt';
 
   const toolchain = core.getInput('toolchain');
   if ( toolchain=='true' ){
-    keyString1=keyString+exec.exec('git log --pretty=tformat:"%h" -n1 tools toolchain')
-    paths.push('staging_dir');
+    stdout=execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
+    keyString=keyString+'-'+stdout;
+    paths.push('staging_dir/host*');
+    paths.push('staging_dir/tool*');
+    paths.push('build_dir/host*');
+    paths.push('build_dir/tool*');
   }
 
   const ccache = core.getInput('ccache');
   if ( ccache=='true' ){
-    keyString=keyString1+'-'+exec.exec('date +%s"')
+    stdout=execSync('date +%s').toString().trim();
+    keyString=keyString+'-'+stdout;
     paths.push('.ccache');
   }
 
   const cache = require('@actions/cache');
+  console.log(keyString);
   const cacheId = cache.saveCache(paths, keyString)
+  .then(res =>{
+    if ( typeof res !== 'undefined' && res ){
+      console.log(res, ' cache saved');
+    }
+  })
 
 } catch (error) {
   core.setFailed(error.message);
