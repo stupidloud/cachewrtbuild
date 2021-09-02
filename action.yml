@@ -17,6 +17,10 @@ inputs:
     description: 'set to clean cache'
     required: false
     default: false
+  prefix:
+    description: 'path prefix to openwrt build directory'
+    required: false
+    defalut: ''
 outputs:
   hit:
     description: 'indicate cache found'
