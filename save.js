@@ -37,5 +37,5 @@ try {
   })
 
 } catch (error) {
-  core.setFailed(error.message);
+  core.warning(error.message);
 }
