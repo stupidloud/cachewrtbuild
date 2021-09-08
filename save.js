@@ -16,8 +16,6 @@ try {
     keyString=keyString+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
-    paths.push('build_dir/host*');
-    paths.push('build_dir/tool*');
   }
 
   const ccache = core.getInput('ccache');

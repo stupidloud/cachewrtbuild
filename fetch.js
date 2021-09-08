@@ -19,8 +19,6 @@ try {
     keyString = keyString+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
-    paths.push('build_dir/host*');
-    paths.push('build_dir/tool*');
   }else{
     skiptoolchain = false;
   }
@@ -44,8 +42,8 @@ try {
       core.setOutput("hit", '1');
       if ( skiptoolchain == 'true' ){
         console.log('skiped');
-        //execSync('sed -i \'s/ $(tool.*\\/stamp-compile)//;\' Makefile');
-        execSync('bash -c \'find build_dir\/{host*,toolchain-*} -name .built\\* -exec touch {} \\;; touch staging_dir\/{host*,toolchain-*}\/stamp\/.*\'');
+        execSync('sed -i \'s/ $(tool.*\\/stamp-compile)//;\' Makefile');
+        //execSync('bash -c \'find build_dir\/{host*,toolchain-*} -name .built\\* -exec touch {} \\;; touch staging_dir\/{host*,toolchain-*}\/stamp\/.*\'');
       }
     }
   })
