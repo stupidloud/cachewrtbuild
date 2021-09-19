@@ -21,6 +21,10 @@ inputs:
     description: 'path prefix to openwrt build directory'
     required: false
     defalut: ''
+  mixkey:
+    description: 'mix a key to identify a cache when you build openwrt for different architecture'
+    required: false
+    defalut: ''
 outputs:
   hit:
     description: 'indicate cache found'

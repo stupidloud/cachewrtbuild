@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync;
 
 try {
   var paths = new Array();
-  var keyString = 'cache-openwrt';
+  var keyString = core.getInput('mixkey')+'cache-openwrt';
   var restoreKeys = new Array();
   const prefix = core.getInput('prefix');
   if ( prefix != '' ){
