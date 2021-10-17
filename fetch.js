@@ -43,6 +43,7 @@ try {
       if ( skiptoolchain == 'true' ){
         console.log('skiped');
         execSync('sed -i \'s/ $(tool.*\\/stamp-compile)//;\' Makefile');
+        execSync('sed -i \'s/ $(tool.*\\/stamp-install)//;\' Makefile');
         //execSync('bash -c \'find build_dir\/{host*,toolchain-*} -name .built\\* -exec touch {} \\;; touch staging_dir\/{host*,toolchain-*}\/stamp\/.*\'');
       }
     }
