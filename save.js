@@ -8,12 +8,13 @@ try {
   const prefix = core.getInput('prefix');
   if ( prefix != '' ){
     process.chdir(prefix);
+  const branch = core.getInput('branch');
   }
 
   const toolchain = core.getInput('toolchain');
   if ( toolchain=='true' ){
     stdout=execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
-    keyString=keyString+'-'+stdout;
+    keyString=keyString+'-'+branch+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
     paths.push('build_dir/host*');
@@ -23,7 +24,7 @@ try {
   const ccache = core.getInput('ccache');
   if ( ccache=='true' ){
     stdout=execSync('date +%s').toString().trim();
-    keyString=keyString+'-'+stdout;
+    keyString=keyString+'-'+branch+'-'+stdout;
     paths.push('.ccache');
   }
 
