@@ -9,6 +9,7 @@ try {
   const prefix = core.getInput('prefix');
   if ( prefix != '' ){
     process.chdir(prefix);
+  const branch = core.getInput('branch');
   }
 
   const toolchain = core.getInput('toolchain');
@@ -29,7 +30,7 @@ try {
   if ( ccache == 'true' ){
     stdout = execSync('date +%s').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
+    keyString = keyString+'-'+branch+'-'+stdout;
     paths.push('.ccache');
   }
 
