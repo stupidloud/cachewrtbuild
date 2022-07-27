@@ -17,7 +17,7 @@ try {
   if ( toolchain == 'true' ){
     stdout = execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
+    keyString = keyString+'-'+branch+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
     paths.push('build_dir/host*');
