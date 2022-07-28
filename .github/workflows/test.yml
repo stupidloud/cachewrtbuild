@@ -18,3 +18,4 @@ jobs:
         with:
           ccache: true
           prefix: ${{ github.workspace }}/openwrt
+          branch: ${{ github.ref_name }}
