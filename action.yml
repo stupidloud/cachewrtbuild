@@ -24,7 +24,7 @@ inputs:
   branch:
     description: 'the current branch of the building'
     required: false
-    defalut: '${GITHUB_REF#refs/heads/}'
+    defalut: '${GITHUB_REF}'
 outputs:
   hit:
     description: 'indicate cache found'
