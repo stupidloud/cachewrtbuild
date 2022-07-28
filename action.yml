@@ -23,7 +23,7 @@ inputs:
     defalut: ''
   branch:
     description: 'the current branch of the building'
-    required: false
+    required: true
     defalut: ${{ github.ref_name }}
 outputs:
   hit:
