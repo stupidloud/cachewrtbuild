@@ -1,6 +1,0 @@
-version: "1"
-rules:
-  - base: main
-    upstream: klever1988:main    # change `wei` to the owner of upstream repo
-    mergeMethod: merge
-    autoMerge: false
