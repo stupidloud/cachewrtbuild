@@ -10,6 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${GITHUB_REF}
       - name: Make openwrt directory
         run: git clone https://github.com/coolsnowwolf/lede.git openwrt
       - name: cache
