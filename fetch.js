@@ -11,6 +11,10 @@ try {
     process.chdir(prefix);
   }
 
+  const branch = process.env.GITHUB_REF_NAME;
+  restoreKeys.unshift(keyString);
+  keyString = keyString+'-'+branch;
+
   const toolchain = core.getInput('toolchain');
   var skiptoolchain = core.getInput('skip');
   if ( toolchain == 'true' ){

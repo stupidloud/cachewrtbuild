@@ -10,6 +10,9 @@ try {
     process.chdir(prefix);
   }
 
+  const branch = process.env.GITHUB_REF_NAME;
+  keyString = keyString+'-'+branch;
+
   const toolchain = core.getInput('toolchain');
   if ( toolchain=='true' ){
     stdout=execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
