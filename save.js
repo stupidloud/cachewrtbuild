@@ -4,12 +4,15 @@ const execSync = require('child_process').execSync;
 
 try {
   var paths = new Array();
-  const branch = process.env.GITHUB_REF_NAME
-  var keyString = 'cache-openwrt'+'-'+branch;
+  var keyString = 'cache-openwrt';
   const prefix = core.getInput('prefix');
   if ( prefix != '' ){
     process.chdir(prefix);
   }
+
+  const branch = process.env.GITHUB_REF_NAME;
+  restoreKeys.unshift(keyString);
+  keyString = keyString+'-'+branch;
 
   const toolchain = core.getInput('toolchain');
   if ( toolchain=='true' ){
