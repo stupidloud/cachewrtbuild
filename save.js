@@ -11,7 +11,6 @@ try {
   }
 
   const branch = process.env.GITHUB_REF_NAME;
-  restoreKeys.unshift(keyString);
   keyString = keyString+'-'+branch;
 
   const toolchain = core.getInput('toolchain');
