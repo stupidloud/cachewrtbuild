@@ -14,7 +14,7 @@ jobs:
       - name: Make openwrt directory
         run: git clone https://github.com/coolsnowwolf/lede.git openwrt
       - name: cache
-        uses: w311ang/cachewrtbuild@main
+        uses: w311angg/cachewrtbuild@main
         with:
           ccache: true
           prefix: ${{ github.workspace }}/openwrt
