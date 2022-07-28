@@ -4,10 +4,10 @@ const execSync = require('child_process').execSync;
 
 try {
   var paths = new Array();
-  var keyString = 'cache-openwrt';
+  const branch = core.getInput('branch');
+  var keyString = 'cache-openwrt'+'-'+branch;
   var restoreKeys = new Array();
   const prefix = core.getInput('prefix');
-  const branch = core.getInput('branch');
   if ( prefix != '' ){
     process.chdir(prefix);
   }
@@ -17,7 +17,7 @@ try {
   if ( toolchain == 'true' ){
     stdout = execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+branch+'-'+stdout;
+    keyString = keyString+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
     paths.push('build_dir/host*');
@@ -30,7 +30,7 @@ try {
   if ( ccache == 'true' ){
     stdout = execSync('date +%s').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+branch+'-'+stdout;
+    keyString = keyString+'-'+stdout;
     paths.push('.ccache');
   }
 

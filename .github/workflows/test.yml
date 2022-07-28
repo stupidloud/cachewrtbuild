@@ -10,10 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ github.ref_name }}
       - name: Make openwrt directory
-        run: mkdir openwrt
+        run: git clone https://github.com/coolsnowwolf/lede.git openwrt
       - name: cache
         uses: w311ang/cachewrtbuild@main
         with:
           ccache: true
           prefix: ${{ github.workspace }}/openwrt
+          branch: ${{ github.ref_name }}
