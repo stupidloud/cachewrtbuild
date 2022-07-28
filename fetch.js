@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync;
 
 try {
   var paths = new Array();
-  const branch = core.getInput('branch');
+  branch = execSync('echo $GITHUB_REF_NAME').toString().trim();
   var keyString = 'cache-openwrt'+'-'+branch;
   var restoreKeys = new Array();
   const prefix = core.getInput('prefix');
