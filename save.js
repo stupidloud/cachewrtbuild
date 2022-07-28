@@ -24,7 +24,7 @@ try {
   const ccache = core.getInput('ccache');
   if ( ccache=='true' ){
     stdout=execSync('date +%s').toString().trim();
-    keyString=keyString+'-'+branch+'-'+stdout;
+    keyString=keyString+'-'+stdout;
     paths.push('.ccache');
   }
 
