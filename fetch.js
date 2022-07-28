@@ -30,7 +30,7 @@ try {
   if ( ccache == 'true' ){
     stdout = execSync('date +%s').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+branch+'-'+stdout;
+    keyString = keyString+'-'+stdout;
     paths.push('.ccache');
   }
 
