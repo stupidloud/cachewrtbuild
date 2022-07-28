@@ -4,9 +4,9 @@ const execSync = require('child_process').execSync;
 
 try {
   var paths = new Array();
+  const branch = core.getInput('branch');
   var keyString = 'cache-openwrt'+'-'+branch;
   const prefix = core.getInput('prefix');
-  const branch = core.getInput('branch');
   if ( prefix != '' ){
     process.chdir(prefix);
   }
