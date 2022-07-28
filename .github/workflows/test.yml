@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Make openwrt directory
-        run: mkdir openwrt
+        run: git clone https://github.com/coolsnowwolf/lede.git openwrt
       - name: cache
         uses: w311ang/cachewrtbuild@main
         with:
