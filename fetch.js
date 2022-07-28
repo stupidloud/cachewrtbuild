@@ -7,6 +7,7 @@ try {
   var keyString = 'cache-openwrt';
   var restoreKeys = new Array();
   const prefix = core.getInput('prefix');
+  const branch = core.getInput('branch');
   if ( prefix != '' ){
     process.chdir(prefix);
   }
@@ -16,7 +17,7 @@ try {
   if ( toolchain == 'true' ){
     stdout = execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
+    keyString = keyString+'-'+branch+'-'+stdout;
     paths.push('staging_dir/host*');
     paths.push('staging_dir/tool*');
     paths.push('build_dir/host*');
@@ -29,7 +30,7 @@ try {
   if ( ccache == 'true' ){
     stdout = execSync('date +%s').toString().trim();
     restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
+    keyString = keyString+'-'+branch+'-'+stdout;
     paths.push('.ccache');
   }
 

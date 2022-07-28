@@ -21,6 +21,10 @@ inputs:
     description: 'path prefix to openwrt build directory'
     required: false
     defalut: ''
+  branch:
+    description: 'the current branch of the building'
+    required: false
+    defalut: '${GITHUB_REF#refs/heads/}'
 outputs:
   hit:
     description: 'indicate cache found'
