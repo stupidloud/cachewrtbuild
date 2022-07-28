@@ -6,9 +6,9 @@ try {
   var paths = new Array();
   var keyString = 'cache-openwrt';
   const prefix = core.getInput('prefix');
+  const branch = core.getInput('branch');
   if ( prefix != '' ){
     process.chdir(prefix);
-  const branch = core.getInput('branch');
   }
 
   const toolchain = core.getInput('toolchain');
