@@ -7,9 +7,9 @@ try {
   var keyString = 'cache-openwrt';
   var restoreKeys = new Array();
   const prefix = core.getInput('prefix');
+  const branch = core.getInput('branch');
   if ( prefix != '' ){
     process.chdir(prefix);
-  const branch = core.getInput('branch');
   }
 
   const toolchain = core.getInput('toolchain');
