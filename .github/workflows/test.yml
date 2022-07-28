@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make openwrt directory
+        run: mkdir openwrt
+      - name: cache
+        uses: w311ang/cachewrtbuild@main
+        with:
+          ccache: true
+          prefix: ${{ github.workspace }}/openwrt
