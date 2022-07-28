@@ -24,7 +24,7 @@ inputs:
   branch:
     description: 'the current branch of the building'
     required: true
-    defalut: ${{ github.ref_name }}
+    defalut: ${{ env.GITHUB_REF_NAME }}
 outputs:
   hit:
     description: 'indicate cache found'
