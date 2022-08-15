@@ -43,6 +43,7 @@ try {
             if (typeof res !== "undefined" && res) {
                 console.log(res, " cache fetched!");
                 core.setOutput("hit", "1");
+                core.saveState("CACHE_STATE", "hit");
                 if (skiptoolchain == "true") {
                     console.log("skiped");
                     execSync(
