@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const execSync = require('child_process').execSync;
 
 try {
