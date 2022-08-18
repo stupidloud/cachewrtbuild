@@ -2,7 +2,8 @@ const core = require("@actions/core");
 const execSync = require("child_process").execSync;
 
 try {
-    if (core.getState("CACHE_STATE") != "hit") {
+    const skip_saving = core.getInput("skip_saving");
+    if (core.getState("CACHE_STATE") != "hit" && skip_saving != "true") {
         var paths = new Array();
         var mixkey = core.getInput("mixkey");
         var keyString = mixkey ? mixkey + "-cache-openwrt" : "cache-openwrt";

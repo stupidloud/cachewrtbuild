@@ -25,6 +25,10 @@ inputs:
     description: 'mix a key to identify a cache when you build openwrt for different architecture'
     required: false
     defalut: ''
+  skip_saving:
+    description: 'skip saving'
+    required: false
+    defalut: false
 outputs:
   hit:
     description: 'indicate cache found'
