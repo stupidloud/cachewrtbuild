@@ -1,4 +1,4 @@
-name: 'Hello World'
+name: 'Cache Wrt Build'
 description: 'Cache builds to speed up openwrt compilation'
 inputs:
   ccache:
