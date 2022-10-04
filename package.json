@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/klever1988/cachewrtbuild#readme",
   "dependencies": {
-    "@actions/cache": "^3.0.3",
-    "@actions/core": "^1.9.1",
-    "child_process": "^1.0.2"
+    "@actions/cache": "*",
+    "@actions/core": "*",
+    "child_process": "*"
   }
 }
