@@ -33,7 +33,7 @@ outputs:
   hit:
     description: 'indicate cache found'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'fetch.js'
   post: 'save.js'
   post-if: 'success()'
