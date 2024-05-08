@@ -45,7 +45,7 @@ try {
                 core.setOutput("hit", "1");
                 core.saveState("CACHE_STATE", "hit");
                 if (skiptoolchain == "true") {
-                    console.log("skiped");
+                    console.log("skipped");
                     execSync(
                         "sed -i 's/ $(tool.*\\/stamp-compile)//;' Makefile"
                     );
