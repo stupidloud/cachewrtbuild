@@ -1,4 +1,4 @@
-name: 'Hello World'
+name: 'Cache Wrt Build'
 description: 'Cache builds to speed up openwrt compilation'
 inputs:
   ccache:
@@ -25,11 +25,15 @@ inputs:
     description: 'mix a key to identify a cache when you build openwrt for different architecture'
     required: false
     defalut: ''
+  skip_saving:
+    description: 'skip saving'
+    required: false
+    defalut: false
 outputs:
   hit:
     description: 'indicate cache found'
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'fetch.js'
   post: 'save.js'
   post-if: 'success()'

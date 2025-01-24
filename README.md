@@ -1,23 +1,49 @@
-# Hello world JavaScript action
+# Cache Wrt Build action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log. To learn how this action was built, see "[Creating a JavaScript action](https://help.github.com/en/articles/creating-a-javascript-action)" in the GitHub Help documentation.
+This action caches builds to speed up openwrt compilation.
 
 ## Inputs
 
-### `who-to-greet`
+### `ccache`
 
-**Required** The name of the person to greet. Default `"World"`.
+Check if to cache ccache. Default `'false'`.
 
-## Outputs
+### `toolchain`
 
-### `time`
+Check if to cache toolchain. Default `'true'`.
 
-The time we greeted you.
+### `skip`
+
+Check if to skip the compilation of toolchain. Default `'true'`.
+
+### `clean`
+
+Set to clean cache. Default `'false'`.
+
+### `prefix`
+
+Path prefix to openwrt build directory. Default `''`.
+
+### `mixkey`
+
+Mix a key to identify a cache when you build openwrt for different architecture. Default `''`.
+
+### `skip_saving`
+
+Skip saving. Default `'false'`.
+
+## Output
+
+### `hit`
+
+Indicate cache found.
 
 ## Example usage
 
 ```yaml
-uses: actions/hello-world-javascript-action@main
+uses: klever1988/cachewrtbuild@main
 with:
-  who-to-greet: 'Mona the Octocat'
+  ccache: 'true'
+  mixkey: 'ramips'
+  prefix: 'openwrt'
 ```
