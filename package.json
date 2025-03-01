@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/klever1988/cachewrtbuild#readme",
   "dependencies": {
-    "@actions/cache": "^4.0.0",
+    "@actions/cache": "^4.0.2",
     "@actions/core": "^1.11.1"
   }
 }
