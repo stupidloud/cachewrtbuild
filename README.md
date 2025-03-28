@@ -1,5 +1,7 @@
 # Cache Wrt Build action
 
+[![Licensed Workflow Status](https://github.com/klever1988/cachewrtbuild/actions/workflows/licensed.yml/badge.svg)](https://github.com/klever1988/cachewrtbuild/actions/workflows/licensed.yml)
+
 This action caches builds to speed up openwrt compilation.
 
 ## Inputs
@@ -46,4 +48,3 @@ with:
   ccache: 'true'
   mixkey: 'ramips'
   prefix: 'openwrt'
-```
