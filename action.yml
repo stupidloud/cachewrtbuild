@@ -4,31 +4,31 @@ inputs:
   ccache:
     description: 'check if to cache ccache'
     required: false
-    default: false
+    default: 'false'
   toolchain:
     description: 'check if to cache toolchain'
     required: false
-    default: true
+    default: 'true'
   skip:
     description: 'check if to skip the compilation of toolchain'
     required: false
-    default: true
+    default: 'true'
   clean:
     description: 'set to clean cache'
     required: false
-    default: false
+    default: 'false'
   prefix:
     description: 'path prefix to openwrt build directory'
     required: false
-    defalut: ''
+    default: ''
   mixkey:
     description: 'mix a key to identify a cache when you build openwrt for different architecture'
     required: false
-    defalut: ''
+    default: ''
   skip_saving:
     description: 'skip saving'
     required: false
-    defalut: false
+    default: 'false'
 outputs:
   hit:
     description: 'indicate cache found'
