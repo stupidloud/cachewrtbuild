@@ -1,25 +1,25 @@
 {
-  "name": "hello-world-javascript-action",
-  "version": "1.0.0",
-  "description": "This action prints \"Hello World\" or \"Hello\" + the name of a person to greet to the log.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "cachewrtbuild-action",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "This action caches builds to speed up openwrt compilation.",
+  "main": "fetch.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/hello-world-javascript-action.git"
+    "url": "git+https://github.com/klever1988/cachewrtbuild.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "klever1988",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/actions/hello-world-javascript-action/issues"
+    "url": "https://github.com/klever1988/cachewrtbuild/issues"
   },
-  "homepage": "https://github.com/actions/hello-world-javascript-action#readme",
+  "homepage": "https://github.com/klever1988/cachewrtbuild#readme",
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
-    "@actions/cache": "^1.0.7",
-    "@actions/core": "^1.1.0",
-    "@actions/github": "^1.1.0"
+    "@actions/cache": "^6.0.0",
+    "@actions/core": "^3.0.0"
   }
 }

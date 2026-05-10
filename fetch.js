@@ -1,54 +1,48 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
-const execSync = require('child_process').execSync;
+import * as core from "@actions/core";
+import { execSync } from "node:child_process";
+import * as cache from "@actions/cache";
+import { buildBaseConfig } from "./utils.js";
 
 try {
-  var paths = new Array();
-  var keyString = core.getInput('mixkey')+'cache-openwrt';
-  var restoreKeys = new Array();
-  const prefix = core.getInput('prefix');
-  if ( prefix != '' ){
-    process.chdir(prefix);
-  }
+    const cleanUpCache = core.getBooleanInput("clean");
+    if (!cleanUpCache) {
+        const { keyString: baseKey, paths, cacheToolchain, cacheCcache } = buildBaseConfig();
+        const skipBuildingToolchain = core.getBooleanInput("skip");
 
-  const toolchain = core.getInput('toolchain');
-  var skiptoolchain = core.getInput('skip');
-  if ( toolchain == 'true' ){
-    stdout = execSync('git log --pretty=tformat:"%h" -n1 tools toolchain').toString().trim();
-    //restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
-    paths.push('staging_dir/host*');
-    paths.push('staging_dir/tool*');
-  }else{
-    skiptoolchain = false;
-  }
+        let keyString = baseKey;
+        const restoreKeys = [];
 
-  const ccache = core.getInput('ccache');
-  if ( ccache == 'true' ){
-    stdout = execSync('date +%s').toString().trim();
-    restoreKeys.unshift(keyString);
-    keyString = keyString+'-'+stdout;
-    paths.push('.ccache');
-  }
+        if (cacheCcache) {
+            const timestamp = Math.floor(Date.now() / 1000).toString();
+            restoreKeys.unshift(keyString);
+            keyString += `-${timestamp}`;
+            paths.push(".ccache");
+        }
 
-  const cache = require('@actions/cache');
-  const clean = core.getInput('clean');
-  if ( clean == 'true' ) return;
-  console.log(keyString, restoreKeys);
-  const cacheKey = cache.restoreCache(paths, keyString, restoreKeys)
-  .then(res =>{
-    if ( typeof res !== 'undefined' && res ){
-      console.log(res,' cache fetched!');
-      core.setOutput("hit", '1');
-      if ( skiptoolchain == 'true' ){
-        console.log('skiped');
-        execSync('sed -i \'s/ $(tool.*\\/stamp-compile)//;\' Makefile');
-        execSync('sed -i \'s/ $(tool.*\\/stamp-install)//;\' Makefile');
-        //execSync('bash -c \'find build_dir\/{host*,toolchain-*} -name .built\\* -exec touch {} \\;; touch staging_dir\/{host*,toolchain-*}\/stamp\/.*\'');
-      }
+        if (paths.length > 0) {
+            core.debug(`Cache key: ${keyString}`);
+            core.debug(`Cache restore keys: ${restoreKeys.join(", ")}`);
+            core.debug(`Cache paths: ${paths.join(", ")}`);
+
+            const cacheFetchingResult = await cache.restoreCache(paths, keyString, restoreKeys);
+
+            if (cacheFetchingResult) {
+                core.info(`${cacheFetchingResult} cache fetched!`);
+                core.setOutput("hit", "1");
+                if (cacheFetchingResult === keyString) {
+                    core.saveState("CACHE_STATE", "hit");
+                }
+
+                if (cacheToolchain && skipBuildingToolchain) {
+                    execSync("sed -i 's/ $(tool.*\\/stamp-compile)//;' Makefile");
+                    execSync("sed -i 's/ $(tool.*\\/stamp-install)//;' Makefile");
+                    core.info("Toolchain building skipped");
+                }
+            }
+        } else {
+            core.debug("No paths configured for caching, skipping");
+        }
     }
-  })
-
 } catch (error) {
-  core.setFailed(error.message);
+    core.setFailed(error instanceof Error ? error.message : String(error));
 }
